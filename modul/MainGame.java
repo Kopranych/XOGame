@@ -34,7 +34,7 @@ public class MainGame {
         gameWindow.showField(field.cells);
         for (int i = 0; i < 10; i++) {
             while(!isShoot){
-                isShoot = field.doShoot(computer.getProgress(), FieldGame.Type.O);
+                isShoot = field.doShoot(computer.getProgress(), "O",FieldGame.Type.O);
             }
             isShoot = false;
             gameWindow.showField(field.cells);
@@ -42,7 +42,7 @@ public class MainGame {
                 break;
             }
             while(!isShoot){
-                isShoot = field.doShoot(player.getProgress(), FieldGame.Type.X);
+                isShoot = field.doShoot(player.getProgress(), "X",FieldGame.Type.X);
             }
             isShoot = false;
             gameWindow.showField(field.cells);
@@ -50,5 +50,6 @@ public class MainGame {
                 break;
             }
         }
+
     }
 }

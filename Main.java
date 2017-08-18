@@ -20,6 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException,
             InstantiationException, IllegalAccessException {
+
         GameWindow window = new GameWindow();
         MainGame game = new MainGame();
         JButton[][] buttons = new JButton[3][3];

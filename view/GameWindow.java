@@ -40,7 +40,8 @@ public class GameWindow extends JFrame implements GUIvable {
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
                 JButton buttonTemp = new XOJButton();
-                buttonTemp.setText(Integer.toString(numbcell++));//переводим числа в строку
+//                buttonTemp.setText(Integer.toString(numbcell++));//переводим числа в строку
+                buttonTemp.setText("");
                 buttons[i][j] = buttonTemp;
                 panel.add(buttonTemp);
                 int finalJ = j;

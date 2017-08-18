@@ -27,7 +27,7 @@ public class FieldGame {
 
     JButton[][] tempButton = new JButton[3][3];
 
-    public enum Type{X, O, NOT_SET}
+    public enum Type {X, O, NOT_SET}
 
     Type[][] cells;
 
@@ -43,7 +43,7 @@ public class FieldGame {
         return toe;
     }
 
-    public FieldGame(){
+    public FieldGame() {
         cells = new Type[YCOORD][XCOORD];
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
@@ -65,22 +65,35 @@ public class FieldGame {
     }
 
 
-    public boolean doShoot(Point point, FieldGame.Type type){
+    public boolean doShoot(Point point, String marker, FieldGame.Type type) {
 
         boolean isBusy;
 
-            if(cells[point.getX()][point.getY()] != type.X &&
-                    cells[point.getY()][point.getX()] != type.O) {
-                cells[point.getY()][point.getX()] = type;
-                if (type == type.O)
-                    buttons[point.getY()][point.getX()].setText("O");
-                else buttons[point.getY()][point.getX()].setText("X");
+        if (buttons[point.getY()][point.getX()].getText() == "") {
+            buttons[point.getY()][point.getX()].setText(marker);
+            if (marker == "X")
+                cells[point.getY()][point.getX()] = type.X;
+            else cells[point.getY()][point.getX()] = type.O;
+            isBusy = true;
+        } else isBusy = false;
 
-                isBusy = true;
-            }else isBusy = false;
-            return isBusy;
-
+        return isBusy;
     }
+
+//    public boolean doShoot(Point point, FieldGame.Type type) {
+//
+//        boolean isBusy;
+//
+//        if (cells[point.getX()][point.getY()] == type.NOT_SET) {
+//            cells[point.getY()][point.getX()] = type;
+//            if (type == type.O)
+//                buttons[point.getY()][point.getX()].setText("O");
+//            else buttons[point.getY()][point.getX()].setText("X");
+//            isBusy = true;
+//        } else isBusy = false;
+//
+//        return isBusy;
+//    }
 
     public void displayGame() {
         for (int i = 0; i < fieldGame.length; i++) {
@@ -112,10 +125,10 @@ public class FieldGame {
             }
         }
         if (cells[0][0] == t && cells[1][1] == t && cells[2][2] == t) {
-                isWin = true;
+            isWin = true;
         }
         if (cells[2][0] == t && cells[1][1] == t && cells[0][2] == t) {
-                isWin = true;
+            isWin = true;
         }
         return isWin;
     }
