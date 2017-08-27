@@ -3,6 +3,7 @@ package XOGame.controller;
 import XOGame.modul.FieldGame;
 import XOGame.modul.Player;
 import XOGame.modul.Point;
+import XOGame.view.GameWindow;
 import ex5.Animal;
 
 /**
@@ -13,4 +14,9 @@ public class GameController{
         Player.setPoint(point);
         Player.setShoot(true);
     }
+
+    public static void startGame(){
+        GameWindow.setContinue(true);
+    }
+    
 }
