@@ -1,6 +1,7 @@
 package XOGame.view;
 
 import XOGame.controller.GameController;
+import XOGame.controller.ListenerMenuBattons;
 import XOGame.modul.Point;
 import XOGame.modul.FieldGame;
 
@@ -13,28 +14,62 @@ import java.awt.event.ActionListener;
  * Created by kopra on 22.07.2017.
  */
 public class GameWindow extends JFrame implements GUIvable {
-    private static final int WIDTH_WINDOW = 350;
-    private static final int HEIGHT_WINDOW = 350;
-    private static final String TITLE_GAME = "XO Game";
 
-    JPanel panel = new XOJPanel();
-    static JButton[][] buttons;
-    FieldGame fieldGame = new FieldGame();
-    JFrame window = new XOJFrame(TITLE_GAME, WIDTH_WINDOW, HEIGHT_WINDOW);
+
+    private JPanel panel = new XOJPanel();
+    private static JButton[][] buttons;
+    private FieldGame fieldGame = new FieldGame();
+    private JFrame window;
+    private XOJPanel panelMenu = new XOJPanel();
+    private XOJPanel panelStateGame = new XOJPanel();
+    private XOJButton[] buttonsMenu = new XOJButton[1];
+    private XOJLabel labelStateGame = new XOJLabel("Game");
+
+    private static boolean isContinue;
+
+    public static void setContinue(boolean aContinue) {
+        isContinue = aContinue;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
 
     public void setButtons(JButton[][] buttons) {
         this.buttons = buttons;
     }
 
-
-
     public void setFieldGame(FieldGame fieldGame) {
         this.fieldGame = fieldGame;
     }
 
-    public void initWindow() {
+    public void continueGame() {
+        isContinue = false;
+        while (!isContinue) ;
+    }
 
-        //       panel.setLayout(new FlowLayout());//по умолчания для JPanel
+    public void initMenu() {
+
+        window.setLayout(new GridLayout(1, 1));
+        panelMenu.setLayout(new FlowLayout());
+
+        buttonsMenu[0] = new XOJButton("START");
+        buttonsMenu[0].addActionListener(new ListenerMenuBattons());
+
+        panelMenu.add(buttonsMenu[0]);
+        window.getContentPane().add(panelMenu);
+        window.setVisible(true);
+
+        continueGame();
+    }
+
+    public void setLabelStateGame(XOJLabel labelStateGame) {
+        this.labelStateGame = labelStateGame;
+    }
+
+    public void initWindowFieldGame() {
+        //panel.setLayout(new FlowLayout());//по умолчания для JPanel
+        panelStateGame.add(labelStateGame);
         panel.setLayout(new GridLayout(3, 3, 4, 4));
         int numbcell = 1;
         for (int i = 0; i < buttons.length; i++) {
@@ -57,11 +92,21 @@ public class GameWindow extends JFrame implements GUIvable {
                     }
                 });
             }
-
         }
 
-        window.add(panel);//добавляем панель в окно
+        window.add(panel, BorderLayout.CENTER);//добавляем панель в окно
+        window.add(panelStateGame, BorderLayout.NORTH);
         window.setVisible(true);
+
+    }
+
+    public void clearWindow(XOJFrame window) {
+
+        this.window = window;
+        for (int i = 0; i < buttons.length; i++) {
+            panel.remove(i);
+        }
+        this.window.remove(panel);
     }
 
     @Override
@@ -75,11 +120,11 @@ public class GameWindow extends JFrame implements GUIvable {
     public boolean show_winner(FieldGame field) {
         boolean isWin = false;
         if (field.getWinner(FieldGame.Type.O)) {
-            System.out.println("Победил комп!");
+            labelStateGame.setText("Победил комп!");
             isWin = true;
         }
         if (field.getWinner(FieldGame.Type.X)) {
-            System.out.println("Победил игрок!");
+            labelStateGame.setText("Победил игрок!");
             isWin = true;
         }
         return isWin;

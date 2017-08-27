@@ -28,7 +28,7 @@ public class MainGame {
         this.buttons = buttons;
     }
 
-    public static void startGame() {
+    public static void coreGame() {
         boolean isShoot = false;
 
         gameWindow.showField(field.cells);
@@ -52,4 +52,5 @@ public class MainGame {
         }
 
     }
+
 }

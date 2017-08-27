@@ -80,21 +80,6 @@ public class FieldGame {
         return isBusy;
     }
 
-//    public boolean doShoot(Point point, FieldGame.Type type) {
-//
-//        boolean isBusy;
-//
-//        if (cells[point.getX()][point.getY()] == type.NOT_SET) {
-//            cells[point.getY()][point.getX()] = type;
-//            if (type == type.O)
-//                buttons[point.getY()][point.getX()].setText("O");
-//            else buttons[point.getY()][point.getX()].setText("X");
-//            isBusy = true;
-//        } else isBusy = false;
-//
-//        return isBusy;
-//    }
-
     public void displayGame() {
         for (int i = 0; i < fieldGame.length; i++) {
             for (int j = 0; j < fieldGame.length; j++) {

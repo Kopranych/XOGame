@@ -11,6 +11,7 @@ public class XOJFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(TitleName);
+        setResizable(false);//запрет на изменение размера окна
         setIconImage(new ImageIcon("gameicon.png").getImage());
     }
 }
